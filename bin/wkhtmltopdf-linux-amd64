@@ -1,7 +1,15 @@
-#!/usr/bin/env ruby
+#!/bin/bash
 
-dir = __dir__ + "/ssl"
-STDERR.puts "Before setting: #{ENV['LD_LIBRARY_PATH']}"
-ENV['LD_LIBRARY_PATH'] = "#{dir}:#{ENV['LD_LIBRARY_PATH']}"
-STDERR.puts "After setting: #{ENV['LD_LIBRARY_PATH']}"
-system "#{dir}/wkhtmltopdf-linux-amd64"
+##########
+## change linking library path
+##########
+
+f=$0
+d=`dirname $f`
+echo "d: $d"
+p=`dirname $d`
+echo "p: $p"
+echo $LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$p/ssl:$LD_LIBRARY_PATH
+echo $LD_LIBRARY_PATH
+$d/wkhtmltopdf-linux-amd64.bin $*
