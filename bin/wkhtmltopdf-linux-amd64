@@ -1,10 +1,7 @@
 #!/usr/bin/env ruby
 
-parts  = __FILE__.split("/")
-parts.pop
-parts.push "ssl"
-dir   = parts.join("/")
+dir = __dir__ + "/ssl"
 STDERR.puts "Before setting: #{ENV['LD_LIBRARY_PATH']}"
-ENV['LD_LIBRARY_PATH'] = dir
+ENV['LD_LIBRARY_PATH'] = "#{dir}:#{ENV['LD_LIBRARY_PATH']}"
 STDERR.puts "After setting: #{ENV['LD_LIBRARY_PATH']}"
 system "#{dir}/wkhtmltopdf-linux-amd64"
